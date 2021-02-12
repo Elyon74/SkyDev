@@ -3,6 +3,7 @@
 #include <string.h>	// Pour utiliser des variables tchar/string
 #include <tchar.h> // Pour utiliser des variables tchar
 
+// Code principal
 // Le nom de la classe de fenetre principale
 static TCHAR szWindowClass[] = _T("DesktopApp");
 
