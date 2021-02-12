@@ -1,2 +1,2 @@
-# Project 1
-A simple c++ application in test
+# SkyDev
+SkyDev C++ Application
