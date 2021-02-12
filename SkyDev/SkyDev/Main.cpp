@@ -54,7 +54,7 @@ int CALLBACK WinMain(
 			szTitle,	// Le nom du projet
 			WS_OVERLAPPEDWINDOW,
 			CW_USEDEFAULT, CW_USEDEFAULT,
-			500, 100,	// Sa taillle 500 sur l' axe x horizontale et 100 sur l' axe y vertical
+			600, 300,	// Sa taillle 500 sur l' axe x horizontale et 100 sur l' axe y vertical
 			NULL,
 			NULL,
 			hInstance,	// on l' instance
@@ -95,7 +95,7 @@ int CALLBACK WinMain(
 			case WM_PAINT:
 				hdc = BeginPaint(hWnd, &ps);	// On paint le message en haut a gauche de la fenetre
 				TextOut(hdc,
-					5, 5,
+					50, 50,	// Emplacement en x horizontale, en y vertical
 					greeting, _tcslen(greeting));
 				EndPaint(hWnd, &ps);
 				break;
