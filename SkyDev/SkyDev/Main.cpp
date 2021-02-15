@@ -1,7 +1,9 @@
-#include <windows.h> // Les programmes windows bureau en c++ necessite toujours d' inclure ces deux fonctions
-#include <stdlib.h>	// Les programmes windows bureau en c++ necessite toujours d' inclure ces deux fonctions
-#include <string.h>	// Pour utiliser des variables tchar/string
-#include <tchar.h> // Pour utiliser des variables tchar
+#include "windows.h" // Les programmes windows bureau en c++ necessite toujours d' inclure ces deux fonctions
+#include "stdlib.h"	// Les programmes windows bureau en c++ necessite toujours d' inclure ces deux fonctions
+#include "string.h" // Pour utiliser des variables tchar/string
+#include "tchar.h" // Pour utiliser des variables tchar
+#include <chrono>
+using namespace std::chrono_literals;
 
 // Code principal
 // Le nom de la classe de fenetre principale
