@@ -2,10 +2,18 @@
 #include "stdlib.h"	// Les programmes windows bureau en c++ necessite toujours d' inclure ces deux fonctions
 #include "string.h" // Pour utiliser des variables tchar/string
 #include "tchar.h" // Pour utiliser des variables tchar
-#include <chrono>
+#include <chrono> // Pour utiliser chrono_literals
+#include <iostream> // Pour enregistrer et lire un fichier
+#include <fstream> // Pour enregistrer et lire un fichier
 using namespace std::chrono_literals;
 
 // Code principal
+int main()
+{
+	std::ofstream flux("test.txt");	// On cree un fichier test.txt a l' inverse ifstream permet de le lire
+	flux.close();
+	return 0;
+}
 // Le nom de la classe de fenetre principale
 static TCHAR szWindowClass[] = _T("DesktopApp");
 
@@ -42,8 +50,8 @@ int CALLBACK WinMain(
 		if (!RegisterClassEx(&wcex))	// Detection de la fenetre
 		{
 			MessageBox(NULL,
-				_T("Call to RegisterClassEx failed!"),	// On utilise _T car on utilise les variables tchar
-				_T("Windows Desktop Guided Tour"),
+				_T("Impossible d' enregistrer la classe !"),	// On utilise _T car on utilise les variables tchar
+				_T("Windows Desktop"),
 				NULL);
 
 			return 1;
@@ -65,8 +73,8 @@ int CALLBACK WinMain(
 		if (!hWnd)
 		{
 			MessageBox(NULL,
-				_T("Call to CreateWindow failed!"),
-				_T("Windows Desktop Guided Tour"),
+				_T("Impossible d' initialiser la fenetre !"),
+				_T("Windows Desktop"),
 				NULL);
 
 			return 1;
@@ -94,6 +102,17 @@ int CALLBACK WinMain(
 
 			switch (message)
 			{
+			case WM_CREATE:
+				HMENU MenuBar = CreateMenu();
+				HMENU hFiles = CreateMenu();
+				HMENU hApropos = CreateMenu();
+				AppendMenu(MenuBar, MF_STRING, (UINT_PTR)hFiles, _T("Fichiers"));
+				AppendMenu(MenuBar, MF_STRING, (UINT_PTR)hApropos, _T("Apropos"));
+				AppendMenu(hFiles, MF_STRING, NULL, _T("Quitter"));
+				SetMenu(hWnd, MenuBar);
+				break;
+			case WM_COMMAND:
+				break;
 			case WM_PAINT:
 				hdc = BeginPaint(hWnd, &ps);	// On paint le message en haut a gauche de la fenetre
 				TextOut(hdc,
