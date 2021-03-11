@@ -10,7 +10,8 @@ using namespace std::chrono_literals;
 // Code principal
 int main()
 {
-	std::ofstream flux("test.txt");	// On cree un fichier test.txt a l' inverse ifstream permet de le lire
+	std::string const test("D:/Anthony/Documents/Dev Logiciel C++ 2/SkyDev/SkyDev/test.txt");
+	std::ofstream flux(test.c_str());	// On cree un fichier test.txt a l' inverse ifstream permet de le lire
 	flux.close();
 	return 0;
 }
