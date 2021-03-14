@@ -138,7 +138,6 @@ int CALLBACK WinMain(
 					break;
 				case FILE_APROPOS:
 					MessageBox(hWnd, "Version 1.11 .", "A propos", MB_ICONINFORMATION);
-					MessageBeep(MB_ICONINFORMATION);
 					break;
 				}
 			case WM_PAINT:
