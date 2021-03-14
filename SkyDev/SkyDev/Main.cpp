@@ -15,9 +15,9 @@ using namespace std::chrono_literals;
 // Code principal
 int main()
 {
-	std::string const test("D:/Anthony/Documents/Dev Logiciel C++ 2/SkyDev/SkyDev/test.txt");
-	std::ofstream flux(test.c_str());	// On cree un fichier test.txt a l' inverse ifstream permet de le lire
-	flux.close();
+	std::ofstream flux { "test.txt" };	// On cree un fichier test.txt a l' inverse ifstream permet de le lire
+	std::string texte{ "test" };
+	flux << '\n' << texte;
 	return 0;
 }
 // Le nom de la classe de fenetre principale
@@ -137,6 +137,7 @@ int CALLBACK WinMain(
 					MessageBeep(MB_ICONINFORMATION);
 					break;
 				case FILE_APROPOS:
+					MessageBox(hWnd, "Version 1.11 .", "A propos", MB_ICONINFORMATION);
 					MessageBeep(MB_ICONINFORMATION);
 					break;
 				}
