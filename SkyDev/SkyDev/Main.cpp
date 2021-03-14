@@ -7,6 +7,11 @@
 #include <fstream> // Pour enregistrer et lire un fichier
 using namespace std::chrono_literals;
 
+#define FILE_MENU_NEW 1
+#define FILE_MENU_EXIT 2
+#define FILE_MENU_SUB 3
+#define FILE_APROPOS 4
+
 // Code principal
 int main()
 {
@@ -99,39 +104,59 @@ int CALLBACK WinMain(
 		{
 			PAINTSTRUCT ps;	// On paint un contenue ici message
 			HDC hdc;	// On creer une variable HDC positionement du message
-			TCHAR greeting[] = _T("Bienvenue !");	// On creer une variable tchar qui s' apelle greeting et le message afficher dans la fenetre
+			TCHAR greeting[] = _T("Lancement du programme SkyDev .");	// On creer une variable tchar qui s' apelle greeting et le message afficher dans la fenetre
 
 			switch (message)
 			{
-			case WM_CREATE: 
+			case WM_CREATE:
 			{
 				HMENU MenuBar = CreateMenu();
 				HMENU hFiles = CreateMenu();
-				HMENU hApropos = CreateMenu();
-				AppendMenu(MenuBar, MF_POPUP, (UINT_PTR)hFiles, "Fichiers");
-				AppendMenu(MenuBar, MF_POPUP, (UINT_PTR)hApropos, "Apropos");
-				AppendMenu(hFiles, MF_STRING, NULL, "Quitter");
-				SetMenu(hWnd, MenuBar);
-				break; 
-			}
-			case WM_COMMAND: 
-			{
+				HMENU hSubMenu = CreateMenu();
 
+				AppendMenu(hSubMenu, MF_STRING, FILE_MENU_SUB, "Entry 1");
+				AppendMenu(MenuBar, MF_POPUP, (UINT_PTR)hFiles, "Fichiers");
+				AppendMenu(MenuBar, MF_POPUP, FILE_APROPOS, "A propos");
+				AppendMenu(hFiles, MF_STRING, FILE_MENU_NEW, "Nouveau");
+				AppendMenu(hFiles, MF_POPUP, (UINT_PTR)hSubMenu, "Ouvrir");
+				AppendMenu(hFiles, MF_SEPARATOR, NULL, NULL);
+				AppendMenu(hFiles, MF_STRING, FILE_MENU_EXIT, "Quitter");
+				SetMenu(hWnd, MenuBar);
 				break;
 			}
+			case WM_COMMAND:
+				switch (wParam)
+				{
+				case FILE_MENU_NEW:
+					MessageBeep(MB_ICONINFORMATION);
+					break;
+				case FILE_MENU_EXIT:
+					DestroyWindow(hWnd);
+					break;
+				case FILE_MENU_SUB:
+					MessageBeep(MB_ICONINFORMATION);
+					break;
+				case FILE_APROPOS:
+					MessageBeep(MB_ICONINFORMATION);
+					break;
+				}
 			case WM_PAINT:
+			{
 				hdc = BeginPaint(hWnd, &ps);	// On paint le message en haut a gauche de la fenetre
 				TextOut(hdc,
 					50, 50,	// Emplacement en x horizontale, en y vertical
 					greeting, _tcslen(greeting));
 				EndPaint(hWnd, &ps);
 				break;
+			}
 			case WM_DESTROY:
+			{
 				PostQuitMessage(0);
 				break;
+			}
 			default:
 				return DefWindowProc(hWnd, message, wParam, lParam);
 				break;
 			}
 			return 0;
-		}	// Fin de la fonction WndProc
+		}// Fin de la fonction WndProc
