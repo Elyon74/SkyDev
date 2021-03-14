@@ -103,17 +103,22 @@ int CALLBACK WinMain(
 
 			switch (message)
 			{
-			case WM_CREATE:
+			case WM_CREATE: 
+			{
 				HMENU MenuBar = CreateMenu();
 				HMENU hFiles = CreateMenu();
 				HMENU hApropos = CreateMenu();
-				AppendMenu(MenuBar, MF_STRING, (UINT_PTR)hFiles, _T("Fichiers"));
-				AppendMenu(MenuBar, MF_STRING, (UINT_PTR)hApropos, _T("Apropos"));
-				AppendMenu(hFiles, MF_STRING, NULL, _T("Quitter"));
+				AppendMenu(MenuBar, MF_POPUP, (UINT_PTR)hFiles, "Fichiers");
+				AppendMenu(MenuBar, MF_POPUP, (UINT_PTR)hApropos, "Apropos");
+				AppendMenu(hFiles, MF_STRING, NULL, "Quitter");
 				SetMenu(hWnd, MenuBar);
+				break; 
+			}
+			case WM_COMMAND: 
+			{
+
 				break;
-			case WM_COMMAND:
-				break;
+			}
 			case WM_PAINT:
 				hdc = BeginPaint(hWnd, &ps);	// On paint le message en haut a gauche de la fenetre
 				TextOut(hdc,
