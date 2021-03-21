@@ -5,19 +5,34 @@
 #include <chrono> // Pour utiliser chrono_literals
 #include <iostream> // Pour enregistrer et lire un fichier
 #include <fstream> // Pour enregistrer et lire un fichier
+#include <sstream> ///Pour faire des chaines de fichiers
 using namespace std::chrono_literals;
 
-#define FILE_MENU_NEW 1
-#define FILE_MENU_EXIT 2
-#define FILE_MENU_SUB 3
+#define FILE_MENU_EXIT 1
+#define FILE_MENU_SUB 2
+#define FILE_MENU_SUB2 3
 #define FILE_APROPOS 4
 
 // Code principal
-int main()
+int notewrite()
 {
-	std::ofstream flux { "test.txt" };	// On cree un fichier test.txt a l' inverse ifstream permet de le lire
-	std::string texte{ "test" };
-	flux << '\n' << texte;
+	for (unsigned int i = 0; i < 999; i++)
+	{
+		std::ostringstream flux;
+		flux << "note_" << i << ".note";
+		std::ofstream ofs(flux.str().c_str());
+		ofs << i;
+		return 0;
+	}
+}
+int noteopen()
+{
+	std::ifstream flux{ "note.note" };
+	if (flux)
+	{
+		flux.close();
+	}
+	else
 	return 0;
 }
 // Le nom de la classe de fenetre principale
@@ -104,7 +119,7 @@ int CALLBACK WinMain(
 		{
 			PAINTSTRUCT ps;	// On paint un contenue ici message
 			HDC hdc;	// On creer une variable HDC positionement du message
-			TCHAR greeting[] = _T("Lancement du programme SkyDev .");	// On creer une variable tchar qui s' apelle greeting et le message afficher dans la fenetre
+			TCHAR greeting[] = _T("");	// On creer une variable tchar qui s' apelle greeting et le message afficher dans la fenetre
 
 			switch (message)
 			{
@@ -113,12 +128,14 @@ int CALLBACK WinMain(
 				HMENU MenuBar = CreateMenu();
 				HMENU hFiles = CreateMenu();
 				HMENU hSubMenu = CreateMenu();
+				HMENU hSubMenu2 = CreateMenu();
 
-				AppendMenu(hSubMenu, MF_STRING, FILE_MENU_SUB, "Entry 1");
+				AppendMenu(hSubMenu, MF_STRING, FILE_MENU_SUB, "Note");
+				AppendMenu(hSubMenu2, MF_STRING, FILE_MENU_SUB2, "Note");
 				AppendMenu(MenuBar, MF_POPUP, (UINT_PTR)hFiles, "Fichiers");
 				AppendMenu(MenuBar, MF_POPUP, FILE_APROPOS, "A propos");
-				AppendMenu(hFiles, MF_STRING, FILE_MENU_NEW, "Nouveau");
-				AppendMenu(hFiles, MF_POPUP, (UINT_PTR)hSubMenu, "Ouvrir");
+				AppendMenu(hFiles, MF_POPUP, (UINT_PTR)hSubMenu, "Nouveau fichier");
+				AppendMenu(hFiles, MF_POPUP, (UINT_PTR)hSubMenu2, "Ouvrir un fichier");
 				AppendMenu(hFiles, MF_SEPARATOR, NULL, NULL);
 				AppendMenu(hFiles, MF_STRING, FILE_MENU_EXIT, "Quitter");
 				SetMenu(hWnd, MenuBar);
@@ -127,14 +144,19 @@ int CALLBACK WinMain(
 			case WM_COMMAND:
 				switch (wParam)
 				{
-				case FILE_MENU_NEW:
-					MessageBeep(MB_ICONINFORMATION);
-					break;
 				case FILE_MENU_EXIT:
 					DestroyWindow(hWnd);
 					break;
 				case FILE_MENU_SUB:
 					MessageBeep(MB_ICONINFORMATION);
+					int i; + 1;
+					notewrite();
+					MessageBox(hWnd, "Un fichier de note a eter creer .", "Info", MB_ICONINFORMATION);
+					break;
+				case FILE_MENU_SUB2:
+					MessageBeep(MB_ICONINFORMATION);
+					noteopen();
+					MessageBox(hWnd, "Pas de fichier de note a ouvrir .", "Erreur", MB_ICONINFORMATION);
 					break;
 				case FILE_APROPOS:
 					MessageBox(hWnd, "Version 1.11 .", "A propos", MB_ICONINFORMATION);
