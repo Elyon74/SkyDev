@@ -149,7 +149,6 @@ int CALLBACK WinMain(
 					break;
 				case FILE_MENU_SUB:
 					MessageBeep(MB_ICONINFORMATION);
-					int i; + 1;
 					notewrite();
 					MessageBox(hWnd, "Un fichier de note a eter creer .", "Info", MB_ICONINFORMATION);
 					break;
@@ -159,7 +158,7 @@ int CALLBACK WinMain(
 					MessageBox(hWnd, "Pas de fichier de note a ouvrir .", "Erreur", MB_ICONINFORMATION);
 					break;
 				case FILE_APROPOS:
-					MessageBox(hWnd, "Version 1.11 .", "A propos", MB_ICONINFORMATION);
+					MessageBox(hWnd, "Version 1.11", "A propos", MB_ICONINFORMATION);
 					break;
 				}
 			case WM_PAINT:
