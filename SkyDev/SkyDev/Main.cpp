@@ -19,7 +19,7 @@ int notewrite()
 	for (unsigned int i = 0; i < 999; i++)
 	{
 		std::ostringstream flux;
-		flux << "note_" << i << ".note";
+		flux << "note_" << i << ".txt";
 		std::ofstream ofs(flux.str().c_str());
 		ofs << i;
 		return 0;
@@ -27,13 +27,13 @@ int notewrite()
 }
 int noteopen()
 {
-	std::ifstream flux{ "note.note" };
-	if (flux)
+	std::ifstream flux ("note_0.txt");
+	if (flux) ("note_0.txt");
 	{
+		notewrite();
 		flux.close();
+		return 0;
 	}
-	else
-	return 0;
 }
 // Le nom de la classe de fenetre principale
 static TCHAR szWindowClass[] = _T("DesktopApp");
