@@ -74,7 +74,6 @@ int CALLBACK WinMain(
 				_T("Impossible d' enregistrer la classe !"),	// On utilise _T car on utilise les variables tchar
 				_T("Windows Desktop"),
 				NULL);
-
 			return 1;
 		}
 
@@ -85,7 +84,7 @@ int CALLBACK WinMain(
 			szTitle,	// Le nom du projet
 			WS_OVERLAPPEDWINDOW,
 			CW_USEDEFAULT, CW_USEDEFAULT,
-			600, 300,	// Sa taillle 500 sur l' axe x horizontale et 100 sur l' axe y vertical
+			600, 500,	// Sa taillle 500 sur l' axe x horizontale et 100 sur l' axe y vertical
 			NULL,
 			NULL,
 			hInstance,	// on l' instance
@@ -158,7 +157,7 @@ int CALLBACK WinMain(
 					MessageBox(hWnd, "Pas de fichier de note a ouvrir .", "Erreur", MB_ICONINFORMATION);
 					break;
 				case FILE_APROPOS:
-					MessageBox(hWnd, "Version 1.11", "A propos", MB_ICONINFORMATION);
+					MessageBox(hWnd, "SkyDev Version 1.11 Copyright 2021", "A propos", MB_ICONINFORMATION);
 					break;
 				}
 			case WM_PAINT:
