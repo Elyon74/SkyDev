@@ -6,31 +6,39 @@
 #include <iostream> // Pour enregistrer et lire un fichier
 #include <fstream> // Pour enregistrer et lire un fichier
 #include <sstream> ///Pour faire des chaines de fichiers
-using namespace std::chrono_literals;
+#include "html_begin.pp" // header from this repo
+#include "D:\Anthony\Documents\JavaDev\index.html" // your HTML file
+#include "html_end.pp" // header from this repo
+using namespace std;
+// using namespace std::chrono_literals;
 
 #define FILE_MENU_EXIT 1
 #define FILE_MENU_SUB 2
 #define FILE_MENU_SUB2 3
 #define FILE_APROPOS 4
 
-// Code principal
-int notewrite()
+int main()
 {
-	for (unsigned int i = 0; i < 999; i++)
-	{
-		std::ostringstream flux;
-		flux << "note_" << i << ".txt";
-		std::ofstream ofs(flux.str().c_str());
-		ofs << i;
-		return 0;
-	}
+	cout << html_page; // outputs your HTML page content
 }
-int noteopen()
+
+// Code principal
+int write()
 {
-	std::ifstream flux ("note_0.txt");
-	if (flux) ("note_0.txt");
+	string test = "Fichier de test";
+	string test2 = "HELLO WORLD";
+	std::ostringstream flux;
+	flux << test << ".txt";
+	std::ofstream ofs(flux.str().c_str());
+	ofs << test2;
+	return 0;
+}
+int open()
+{
+	std::ifstream flux ("fichier.txt");
+	if (flux) ("fichier.txt");
 	{
-		notewrite();
+		write();
 		flux.close();
 		return 0;
 	}
@@ -87,7 +95,7 @@ int CALLBACK WinMain(
 			800, 600,	// Sa taillle 500 sur l' axe x horizontale et 100 sur l' axe y vertical
 			NULL,
 			NULL,
-			hInstance,	// on l' instance
+			hInstance,	// On l' instance
 			NULL
 		);
 		if (!hWnd)
@@ -129,8 +137,8 @@ int CALLBACK WinMain(
 				HMENU hSubMenu = CreateMenu();
 				HMENU hSubMenu2 = CreateMenu();
 
-				AppendMenu(hSubMenu, MF_STRING, FILE_MENU_SUB, "Note");
-				AppendMenu(hSubMenu2, MF_STRING, FILE_MENU_SUB2, "Note");
+				AppendMenu(hSubMenu, MF_STRING, FILE_MENU_SUB, "Fichier texte");
+				AppendMenu(hSubMenu2, MF_STRING, FILE_MENU_SUB2, "Fichier texte");
 				AppendMenu(MenuBar, MF_POPUP, (UINT_PTR)hFiles, "Fichiers");
 				AppendMenu(MenuBar, MF_POPUP, FILE_APROPOS, "A propos");
 				AppendMenu(hFiles, MF_POPUP, (UINT_PTR)hSubMenu, "Nouveau fichier");
@@ -148,13 +156,13 @@ int CALLBACK WinMain(
 					break;
 				case FILE_MENU_SUB:
 					MessageBeep(MB_ICONINFORMATION);
-					notewrite();
-					MessageBox(hWnd, "Un fichier de note a eter creer .", "Info", MB_ICONINFORMATION);
+					write();
+					MessageBox(hWnd, "Un fichier a eter creer dans le dossier du logiciel.", "Info", MB_ICONINFORMATION);
 					break;
 				case FILE_MENU_SUB2:
 					MessageBeep(MB_ICONINFORMATION);
-					noteopen();
-					MessageBox(hWnd, "Pas de fichier de note a ouvrir .", "Erreur", MB_ICONINFORMATION);
+					open();
+					MessageBox(hWnd, "Pas de fichier a ouvrir .", "Erreur", MB_ICONINFORMATION);
 					break;
 				case FILE_APROPOS:
 					MessageBox(hWnd, "SkyDev Version 1.11 Copyright 2021", "A propos", MB_ICONINFORMATION);
