@@ -84,7 +84,7 @@ int CALLBACK WinMain(
 			szTitle,	// Le nom du projet
 			WS_OVERLAPPEDWINDOW,
 			CW_USEDEFAULT, CW_USEDEFAULT,
-			600, 500,	// Sa taillle 500 sur l' axe x horizontale et 100 sur l' axe y vertical
+			800, 600,	// Sa taillle 500 sur l' axe x horizontale et 100 sur l' axe y vertical
 			NULL,
 			NULL,
 			hInstance,	// on l' instance
